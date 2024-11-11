@@ -1,29 +1,30 @@
-//
-//  Package.swift
-//  NetworkSDK
-//
-//  Created by Ahmet Ekti on 11/11/24.
-//
-
+// swift-tools-version: 5.9
 import PackageDescription
 
 let package = Package(
     name: "NetworkSDK",
     platforms: [
-        .iOS(.v15)
+        .iOS(.v13),
+        .macOS(.v10_15)
     ],
     products: [
         .library(
             name: "NetworkSDK",
+            type: .dynamic,
             targets: ["NetworkSDK"]),
     ],
-    dependencies: [],
+    dependencies: [
+        
+    ],
     targets: [
         .target(
             name: "NetworkSDK",
-            dependencies: []),
+            dependencies: [],
+            path: "Sources/NetworkSDK"),
         .testTarget(
             name: "NetworkSDKTests",
-            dependencies: ["NetworkSDK"]),
-    ]
+            dependencies: ["NetworkSDK"],
+            path: "Tests/NetworkSDKTests")
+    ],
+    swiftLanguageVersions: [.v5]
 )
