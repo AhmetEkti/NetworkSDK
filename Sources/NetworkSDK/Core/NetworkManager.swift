@@ -15,6 +15,10 @@ public class NetworkManager {
     private let cacheManager: CacheManager
     private let retryManager: RetryManager
     
+    public static func configure(with configuration: NetworkConfiguration) {
+        shared = NetworkManager(configuration: configuration)
+    }
+    
     public init(configuration: NetworkConfiguration) {
         self.configuration = configuration
         
@@ -28,12 +32,20 @@ public class NetworkManager {
         self.retryManager = RetryManager()
     }
     
+    private static func validateConfiguration() {
+        guard shared != nil else {
+            fatalError("NetworkManager must be configured with 'configure(with:)' before using")
+        }
+    }
+    
     public func request<T: Decodable>(
         endpoint: Endpoint,
         responseType: T.Type,
         cachePolicy: CachePolicy = .ignore,
         retryStrategy: RetryStrategy = .default
     ) async throws -> T {
+        NetworkManager.validateConfiguration()
+        
         if let cachedData = try await cacheManager.handleCache(
             for: endpoint,
             cachePolicy: cachePolicy
