@@ -5,6 +5,8 @@
 //  Created by Ahmet Ekti on 11/11/24.
 //
 
+import Foundation
+
 public class NetworkLogger {
     public static func log(request: URLRequest) {
         print("⚡️ REQUEST:")

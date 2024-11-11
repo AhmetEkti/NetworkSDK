@@ -5,6 +5,8 @@
 //  Created by Ahmet Ekti on 11/11/24.
 //
 
+import Foundation
+
 public enum NetworkError: Error {
     case invalidURL
     case noData

@@ -5,6 +5,8 @@
 //  Created by Ahmet Ekti on 11/11/24.
 //
 
+import Foundation
+
 public class RequestBuilder {
     private var endpoint: String
     private var method: HTTPMethod = .get
